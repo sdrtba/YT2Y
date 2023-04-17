@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, make_response
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -8,15 +8,9 @@ def foo():
         req = request.get_json()
         print(req)
 
-        resp = 'foo'
+        resp = {'status': 500}
         if req.get('url_song') is not None:
-            #resp = make_response({'song_name': 'dadaya'})
-            #resp.headers['Access-Control-Allow-Origin'] = '*'
-            resp = {'song_name': 'Crimewave - Crystall Castles'}
-        elif req.get('post-target') is not None:
-            resp = {'status': '201'}
-        elif req.get('status') == 'NoneTypeResponse':
-            resp = {'status': '500'}
+            resp = {'status': 201}
 
         return resp
 

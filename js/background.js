@@ -1,10 +1,12 @@
-
-const REQUEST_PAYLOAD = {action: 'start_dialog'};
-
-
-// entry point
-chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action == 'start_dialog') {
-    openTarget();
-  }
-});
+//chrome.runtime.onInstalled.addListener(() => {
+//  chrome.contextMenus.create({
+//    id: 'test',
+//    title: 'hey',
+//    type: 'normal',
+//    contexts: ['selection']
+//  })
+//
+//  chrome.bookmarks.onCreated.addListener(function(){
+//    console.log('created')
+//  })
+//})
