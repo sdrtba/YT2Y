@@ -8,11 +8,9 @@ def foo():
         req = request.get_json()
         print(req)
 
-        resp = {'status': 500}
-        if req.get('url_song') is not None:
-            resp = {'status': 201}
 
-        return resp
+
+        return {'status': 201}
 
 
     elif request.method == 'GET':
