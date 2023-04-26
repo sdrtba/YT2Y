@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Site</title>
-    <link href="css/style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <h1>Music Sender</h1>
-    <div class="button-container">
-      <a id="send" class="button">Send</a>
-    </div>
-    <script src="js/script.js"></script>
-  </body>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>YT2Y</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
+</head>
+<body>
+	<header>
+		<h1>YT2Y</h1>
+	</header>
+	<main>
+		<form>
+      		<label for="font-size">Song Name:</label>
+			<input type="text" id="song_name" name="input-text">
+			<label for="font-size">Artist Name:</label>
+			<input type="text" id="artist_name" name="input-text">
+			<button type="submit" id="button">Send</button>
+		</form>
+	</main>
+</body>
 </html>
