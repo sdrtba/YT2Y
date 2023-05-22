@@ -1,17 +1,16 @@
-const req = {};
+const contentRequest = new Object();
 
-// !change
-window.addEventListener('load', () => {
+// DOMContentLoaded не работает. Что это пока непонятно
+if (document.readyState === "interactive") {
     const url = document.URL;
     if (url.includes('https://www.youtube.com/')) {
-        req.code = 0
-        req.song_url = url
-        req.song_name = document.title;
+        contentRequest.song_url = url
+        contentRequest.song_name = document.title;
     }
     if (url.includes('https://music.yandex.ru/handlers/')) {
-        req.code = 2
-        req.target = document.body.firstElementChild.innerText
+        contentRequest.target = JSON.parse(document.body.firstElementChild.innerText)['post-target']
+        setTimeout(() => close(), 1000)
     }
 
-    chrome.runtime.sendMessage(req)
-})
+    chrome.runtime.sendMessage(contentRequest) // {song_url: '', song_name: ''}    {target: ''}
+}

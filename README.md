@@ -1,3 +1,3 @@
-# YT2Y
+# conent -> background
 
-somesome
+# script -> background -> content -> background -> main.py

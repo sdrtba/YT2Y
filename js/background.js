@@ -1,48 +1,51 @@
-const URL = 'https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3&filename='
-let oauthTabId
-const req = {}
+const TEST_SEND_URL = 'https://1ddb-2a00-1fa1-c2ad-1ee8-a878-5dff-8418-683a.ngrok-free.app/'
+const BASE_TARGET_URL = 'https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3'
+const EXT_ID = "ldaabkikipokheljnbnngcnhhckfjfbm";
+const request = new Object();
 
-const sendData = () => {
-    console.log(req)
 
-    req.code = 3
-    chrome.runtime.sendMessage(req)
+const postRequest = () => {
+    fetch(TEST_SEND_URL, {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(request)
+    }).then(function(r) {
+        return r;
+    }).then(function(data) {
+        console.log(data);
+    });
 }
 
-const openOauthTab = () => {
-    const target_url = URL + `&filename=${req.song_name}` + `&artist=${req.artist_name}`
-    chrome.tabs.create({url: target_url}, (tab) => { oauthTabId = tab.id})
-};
+
+// open tab for target link
+const openTargetLink = () => {
+    const target_url = BASE_TARGET_URL + `&filename=${request.song_name}` + `&artist=${request.artist_name}`
+    chrome.tabs.create({url: target_url})
+}
 
 
-chrome.tabs.onUpdated.addListener((tabId, _, tab) => {
-    if (oauthTabId !== tabId) {
-        return
+// main
+chrome.runtime.onMessage.addListener((msg, sender) => {
+    // popup case
+    if (sender.origin.includes(EXT_ID)) {
+        msg.song_name ? request.song_name = msg.song_name : {}
+        request.artist_name = msg.artist_name
+
+        openTargetLink()
     }
+    // content case
+    else {
+        request.song_url ? {} : request.song_url = msg.song_url
+        request.song_name ? {} : request.song_name = msg.song_name
 
-    setTimeout(() => chrome.tabs.remove(tabId), 1000)
-
-    oauthTabId = null
-})
-
-
-chrome.runtime.onMessage.addListener((msg) => {
-    // send button
-    if (msg.code === 0) {
-        req.song_url = msg.song_url
-        req.song_name = msg.song_name
-    }
-    // on load
-    if (msg.code === 1) {
-        req.artist_name = msg.artist_name
-        if (msg.song_name) {
-            req.song_name = msg.song_name
+        // after getting target and closing tab
+        if (msg.target) {
+            request.target = msg.target
+            postRequest();
         }
-        openOauthTab()
     }
-    // target
-    if (msg.code === 2) {
-        req.target = msg.target
-        sendData()
-    }
+
+    console.log(request)
 })
