@@ -9,7 +9,7 @@
         "default_popup": "index.html"
     },
 
-    "permissions": ["activeTab", "scripting", "tabs", "storage"],
+    "permissions": ["activeTab", "scripting", "tabs"],
 
     "background": {
         "service_worker": "js/background.js"
@@ -20,5 +20,7 @@
           "matches": ["https://*.youtube.com/*", "https://music.yandex.ru/handlers/*"],
           "js": ["js/content.js"]
         }
-    ]
+    ],
+
+    "icons": {"48": "icon48.png"}
 }
