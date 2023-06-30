@@ -1,5 +1,6 @@
 # Установка
-1. Зайти на browser://extensions/ или edge://extensions/
+## для Yandex. Для остальных похоже(edge://extensions/, chrome://extensions/)
+1. Зайти на browser://extensions/
 2. Включить режим разработчика ![2](https://github.com/sdrtba/YT2Y/assets/64638190/278464ef-5cba-473e-aa2e-8ab6a7508cdf)
 
 3. Загрузить распакованное расширение![3](https://github.com/sdrtba/YT2Y/assets/64638190/965a38c1-4412-4d8c-8561-cb4b0b38edfd)
