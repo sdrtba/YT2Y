@@ -1,16 +1,15 @@
-const TEST_SEND_URL = 'https://1ddb-2a00-1fa1-c2ad-1ee8-a878-5dff-8418-683a.ngrok-free.app/'
-const BASE_TARGET_URL = 'https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3'
-const EXT_ID = "ldaabkikipokheljnbnngcnhhckfjfbm";
-const request = new Object();
+const BACKEND = 'https://flask-production-5543a.up.railway.app/';
+let songUrl = new String();
 
+const PostRequest = (postTarget) => {
+    console.log({postTarget, songUrl})
 
-const postRequest = () => {
-    fetch(TEST_SEND_URL, {
+    fetch(BACKEND, {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify(request)
+        body: JSON.stringify({postTarget, songUrl})
     }).then(function(r) {
         return r;
     }).then(function(data) {
@@ -20,32 +19,20 @@ const postRequest = () => {
 
 
 // open tab for target link
-const openTargetLink = () => {
-    const target_url = BASE_TARGET_URL + `&filename=${request.song_name}` + `&artist=${request.artist_name}`
-    chrome.tabs.create({url: target_url})
+const OpenUrlWithTarget = (songName) => {
+    const urlWithTarget = `https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3&filename=${songName}`;
+    chrome.tabs.create({url: urlWithTarget});
 }
 
 
-// main
-chrome.runtime.onMessage.addListener((msg, sender) => {
-    // popup case
-    if (sender.origin.includes(EXT_ID)) {
-        msg.song_name ? request.song_name = msg.song_name : {}
-        request.artist_name = msg.artist_name
-
-        openTargetLink()
+chrome.runtime.onMessage.addListener((msg) => {
+    // popup
+    if (msg.isPopup) {
+        songUrl = msg.songUrl;
+        OpenUrlWithTarget(msg.songName);
     }
-    // content case
+    // content
     else {
-        request.song_url ? {} : request.song_url = msg.song_url
-        request.song_name ? {} : request.song_name = msg.song_name
-
-        // after getting target and closing tab
-        if (msg.target) {
-            request.target = msg.target
-            postRequest();
-        }
+        PostRequest(msg.postTarget);
     }
-
-    console.log(request)
 })

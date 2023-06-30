@@ -1,12 +1,17 @@
-const popupRequest = new Object();
+const songData = new Object();
 
 document.addEventListener("DOMContentLoaded", () => {
-    const main = () => {
-        popupRequest.song_name = document.getElementById("song_name").value;
-        popupRequest.artist_name = document.getElementById("artist_name").value;
+    const SendSongData = () => {
+        songData.isPopup = true
+        songData.songName = document.getElementById("songName").value;
 
-        chrome.runtime.sendMessage(popupRequest) // {song_name: '', artist_name: ''}
+        chrome.tabs.query({active:true}, tabs=>{
+            const tab=tabs[0];
+            songData.songUrl = tab.url
+            chrome.runtime.sendMessage(songData)
+        })
+
     }
 
-    document.getElementById("send").addEventListener("click", main);
+    document.getElementById("send").addEventListener("click", SendSongData);
 })

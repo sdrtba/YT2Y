@@ -45,10 +45,6 @@ input[type="text"] {
     background-image: url("song_thumbnail.png");
 }
 
-#artist_name {
-    background-image: url("artist_thumbnail.png");
-}
-
 button {
     padding: 10px 20px;
     background-color: #4caf50;
