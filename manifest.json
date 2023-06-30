@@ -3,7 +3,7 @@
     "description": "sdrtba",
     "version": "1.0",
     "manifest_version": 3,
-    "host_permissions": ["https://*.up.railway.app/*","https://*.eu.ngrok.io/*","https://*.ngrok-free.app/*"],
+    "host_permissions": ["https://*.up.railway.app/*"],
 
     "action": {
         "default_popup": "index.html"
