@@ -22,5 +22,5 @@
         }
     ],
 
-    "icons": {"48": "icon48.png"}
+    "icons": {"48": "res/icon48.png"}
 }
