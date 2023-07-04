@@ -1,9 +1,8 @@
 const BACKEND = 'https://flask-production-5543a.up.railway.app/';
 let songUrl = new String();
 
-const PostRequest = (postTarget) => {
-    console.log({postTarget, songUrl})
 
+const PostRequest = (postTarget) => {
     fetch(BACKEND, {
         method: 'POST',
         headers: {
@@ -20,8 +19,8 @@ const PostRequest = (postTarget) => {
 
 // open tab for target link
 const OpenUrlWithTarget = (songName) => {
-    const urlWithTarget = `https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3&filename=${songName}`;
-    chrome.tabs.create({url: urlWithTarget});
+    let targetURI = `https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3&filename=${songName}`;
+    chrome.tabs.create({url: targetURI});
 }
 
 

@@ -1,26 +1,15 @@
 {
     "name":"YT2Y",
-    "description": "sdrtba",
-    "version": "1.0",
+    "description": "Easy way to transfer music from YouTube to YandexMusic",
+    "author": "https://github.com/sdrtba",
+    "version": "0.0.1",
+
     "manifest_version": 3,
     "host_permissions": ["https://*.up.railway.app/*"],
+    "permissions": ["tabs"],
 
-    "action": {
-        "default_popup": "index.html"
-    },
-
-    "permissions": ["activeTab", "scripting", "tabs"],
-
-    "background": {
-        "service_worker": "js/background.js"
-    },
-
-    "content_scripts": [
-        {
-          "matches": ["https://*.youtube.com/*", "https://music.yandex.ru/handlers/*"],
-          "js": ["js/content.js"]
-        }
-    ],
-
-    "icons": {"48": "res/icon48.png"}
+    "action": {"default_popup": "popup.html"},
+    "background": {"service_worker": "js/background.js"},
+    "content_scripts": [{"matches": ["https://music.yandex.ru/handlers/*"], "js": ["js/content.js"]}],
+    "icons": {"128": "res/icon128.png"}
 }
