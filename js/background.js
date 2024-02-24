@@ -1,4 +1,4 @@
-const BACKEND = 'https://flask-production-5543a.up.railway.app/';
+const BACKEND = '';
 let songUrl = new String();
 
 
