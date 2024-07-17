@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
         songData.isPopup = true
         songData.songName = document.getElementById("songName").value;
 
-        chrome.tabs.query({active:true, currentWindow: true}, tabs=>{
-            songData.songUrl = url=tabs[0].url;
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+            songData.songUrl = url = tabs[0].url;
             chrome.runtime.sendMessage(songData)
         })
 

@@ -8,10 +8,10 @@ const PostRequest = (postTarget) => {
         headers: {
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({postTarget, songUrl})
-    }).then(function(r) {
+        body: JSON.stringify({ postTarget, songUrl })
+    }).then(function (r) {
         return r;
-    }).then(function(data) {
+    }).then(function (data) {
         console.log(data);
     });
 }
@@ -20,7 +20,7 @@ const PostRequest = (postTarget) => {
 // open tab for target link
 const OpenUrlWithTarget = (songName) => {
     let targetURI = `https://music.yandex.ru/handlers/ugc-upload.jsx?kind=3&filename=${songName}`;
-    chrome.tabs.create({url: targetURI});
+    chrome.tabs.create({ url: targetURI });
 }
 
 
